@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.trello.rxlifecycle.components.support.RxFragment;
@@ -56,6 +61,9 @@ public class RiJiFragment extends RxFragment {
     private RiJiAdapter qadapter;
     private List<Duty> datas;
     private RxBus _rxBus;
+    private DrawerLayout drawerLayout;
+    private ImageView imageView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,11 +78,23 @@ public class RiJiFragment extends RxFragment {
         qadapter = new RiJiAdapter(getContext(), datas);
         //设置动画
         qadapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        drawerLayout = rootView.findViewById(R.id.drawer);
+        imageView = rootView.findViewById(R.id.common_iv_test);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         rv_show_diary = (RecyclerView) rootView.findViewById(R.id.rv_show_diary);
         rv_show_diary.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_show_diary.setItemAnimator(new DefaultItemAnimator());
         rv_show_diary.setAdapter(qadapter);
+
+
+
+
 
         qadapter.setOnRecyclerViewItemChildClickListener(new BaseQuickAdapter.OnRecyclerViewItemChildClickListener() {
             @Override
@@ -153,6 +173,7 @@ public class RiJiFragment extends RxFragment {
                 xg();
             }
         }, 200);
+
     }
 
     public void xg() {
