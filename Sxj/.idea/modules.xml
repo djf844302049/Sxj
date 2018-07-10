@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Sxj.iml" filepath="$PROJECT_DIR$/Sxj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alarmmanagerclock/alarmmanagerclock.iml" filepath="$PROJECT_DIR$/alarmmanagerclock/alarmmanagerclock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greendao_java/greendao_java.iml" filepath="$PROJECT_DIR$/greendao_java/greendao_java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sxj/sxj.iml" filepath="$PROJECT_DIR$/sxj/sxj.iml" />
+    </modules>
+  </component>
+</project>

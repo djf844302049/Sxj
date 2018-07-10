@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+        <include layout="@layout/tool_bar"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_duty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <TextView
+                android:id="@+id/tv_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dp_18"
+                android:text="你还没有添加待办事项哦!"/>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="@dimen/fab_margin_bottom"
+                android:layout_marginRight="@dimen/fab_margin_right"
+                android:src="@mipmap/ic_fab_add"
+                app:borderWidth="0dp"
+                app:fabSize="normal"/>
+
+        </FrameLayout>
+    </LinearLayout>

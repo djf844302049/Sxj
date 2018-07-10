@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.yuukidach.ucount.AddItemActivity">
+
+    <View
+        android:id="@+id/center_view_two"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/add_cost_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/center_view_two"
+        android:background="@null"
+        android:text="@string/add_cost_button_string"
+        android:textColor="@color/colorOrange"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/add_earn_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/add_cost_button"
+        android:layout_alignEnd="@id/center_view_two"
+        android:background="@null"
+        android:text="@string/add_earn_button_string"
+        android:textColor="@color/colorSlateGray"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:id="@+id/have_chosen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/add_cost_button"
+        android:orientation="horizontal"
+        app:layout_heightPercent="8%">
+
+        <ImageView
+            android:id="@+id/chosen_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/type_big_1"/>
+
+        <TextView
+            android:id="@+id/chosen_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@id/chosen_image"
+            android:text="一般"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/input_money_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="0.00"
+            android:textColor="#fff"
+            android:textSize="19sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/have_chosen"
+        android:background="#FFFFFF"
+        app:layout_heightPercent="45%">
+    </RelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/item_fragment"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/page2_gradient">
+
+        <RelativeLayout
+            android:id="@+id/calculator_banner"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#f3efef"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/add_description"
+                android:background="#00000000"
+                android:gravity="center|left"
+                android:hint="备注"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:src="@drawable/pencil"
+                android:textColor="#000000"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/add_description"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#00000000"
+                android:scaleType="centerInside"
+                android:src="@drawable/pencil"/>
+        </RelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/input_board"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/calculator_banner"
+            android:useDefaultMargins="false"
+            app:layout_widthPercent="70%">
+
+            <Button
+                android:id="@+id/one"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="1"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/two"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toEndOf="@id/one"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="2"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/three"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toEndOf="@id/two"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="3"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/four"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/one"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="4"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/five"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/one"
+                android:layout_toEndOf="@id/four"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="5"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/six"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/one"
+                android:layout_toEndOf="@id/five"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="6"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/seven"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/four"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="7"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/eight"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/four"
+                android:layout_toEndOf="@id/seven"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="8"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/nine"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/four"
+                android:layout_toEndOf="@id/eight"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="9"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/seven"
+                android:background="@drawable/calculator_button"
+                android:text="清零"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/zero"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/seven"
+                android:layout_toEndOf="@id/clear"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorNumOnclick"
+                android:text="0"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+            <Button
+                android:id="@+id/dot"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/seven"
+                android:layout_toEndOf="@id/zero"
+                android:background="@drawable/calculator_button"
+                android:fontFamily="sans-serif-light"
+                android:onClick="calculatorPushDot"
+                android:text="."
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_heightPercent="25%"
+                app:layout_widthPercent="33%"/>
+
+        </android.support.percent.PercentRelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/calculator_sidebar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/input_board"
+            android:background="@drawable/calculator_button"
+            android:orientation="vertical"
+            app:layout_widthPercent="31%">
+
+            <TextView
+                android:id="@+id/anime_words"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="记得点保存哦"
+                android:textColor="#000"
+                android:textSize="15sp"/>
+
+            <!--<ImageButton
+                android:id="@+id/add_finish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/konata3"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="27dp"
+                android:background="#00000000"/>-->
+            <Button
+                android:id="@+id/add_save"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="27dp"
+                android:background="#00000000"
+                android:scaleType="centerCrop"
+                android:text="保存"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>

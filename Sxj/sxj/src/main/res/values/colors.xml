@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e10e07</color>
+    <color name="colorPrimaryDark">#36dfb5</color>
+    <color name="colorAccent">#FCC800</color>
+    <color name="black">#d8d9f4</color>
+    <color name="white">#dddddd</color>
+    <color name="gravy">#c1c1c1</color>
+    <color name="gray">#666666</color>
+    <color name="black0">#000000</color>
+    <color name="duty_name_color">#5156fc</color>
+    <color name="duty_title_color">#8ce61f6e</color>
+    <color name="duty_info_color">#c88c8c8c</color>
+    <color name="add_back_color">#b4d4f4f3</color>
+    <color name="base">#c88c8c8c</color>
+    <color name="arrow">#2af4ff</color>
+    <color name="highlight">#ddd</color>
+    <color name="floating_label">#d04ddecd</color>
+
+    <color name="colorLightSteelBlue">#DEC4B0</color>
+    <color name="colorSlateGray">#908070</color>
+    <color name="colorCrimson">#dc1421</color>
+    <color name="colorOrange">#ff8c00</color>
+    <color name="colorBlue">#6991e6</color>
+    <color name="colorLightGray">#f0e9e9</color>
+    <color name="colorGray">#c1bfbf</color>
+    <color name="colorWhite">#fff</color>
+    <color name="blue">#a2c2ce</color>
+    <color name="gray0">#bbafb4</color>
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="white0">#fafafa</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+</resources>

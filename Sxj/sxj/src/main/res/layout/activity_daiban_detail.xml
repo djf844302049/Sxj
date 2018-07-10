@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:scaleType="center"
+            android:text="取消"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleType="center"
+            android:text="新增"
+            android:textColor="@color/black0"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingRight="12dp"
+            android:scaleType="center"
+            android:text="保存"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="待办时间：  "
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp">
+
+            <com.yzrj.app.suixinji.widget.DatePickerView
+                android:id="@+id/year_pv"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/year"
+                android:textColor="#333333"
+                android:textSize="18sp"/>
+
+            <com.yzrj.app.suixinji.widget.DatePickerView
+                android:id="@+id/month_pv"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/month"
+                android:textColor="#333333"
+                android:textSize="18sp"/>
+
+            <com.yzrj.app.suixinji.widget.DatePickerView
+                android:id="@+id/day_pv"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/day"
+                android:textColor="#333333"
+                android:textSize="18sp"/>
+
+            <com.yzrj.app.suixinji.widget.DatePickerView
+                android:id="@+id/hour_pv"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:id="@+id/hour_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/hour"
+                android:textColor="#333333"
+                android:textSize="18sp"/>
+
+            <com.yzrj.app.suixinji.widget.DatePickerView
+                android:id="@+id/minute_pv"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:id="@+id/minute_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/minute"
+                android:textColor="#333333"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gravy"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标题：  "
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="点击输入标题"
+                    android:textColorHint="@color/gravy"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gravy"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="20dp"
+                android:text="详细内容："
+                android:textColor="@color/gray"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/et_info"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="4dp"
+                android:gravity="top"
+                android:hint="点击输入详细内容"
+                android:textColorHint="@color/gravy"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gravy"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="闹钟模式："
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"/>
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    app:ms_alignLabels="false"
+                    app:ms_arrowColor="@color/colorAccent"
+                    app:ms_arrowSize="16dp"
+                    app:ms_baseColor="@color/base"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_floatingLabelColor="@color/colorPrimaryDark"
+                    app:ms_floatingLabelText="floating label"
+                    app:ms_highlightColor="@color/highlight"
+                    app:ms_hintColor="@color/base"
+                    app:ms_multiline="false"
+                    app:ms_thickness="1dp"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gravy"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提醒设置："
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"/>
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    app:ms_alignLabels="false"
+                    app:ms_arrowColor="@color/colorAccent"
+                    app:ms_arrowSize="16dp"
+                    app:ms_baseColor="@color/base"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_floatingLabelColor="@color/colorPrimaryDark"
+                    app:ms_floatingLabelText="floating label"
+                    app:ms_highlightColor="@color/highlight"
+                    app:ms_hintColor="@color/base"
+                    app:ms_multiline="false"
+                    app:ms_thickness="1dp"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gravy"/>
+
+
+</LinearLayout>

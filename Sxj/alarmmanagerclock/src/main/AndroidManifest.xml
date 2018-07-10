@@ -1,0 +1,31 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.yzrj.lib.alarmmanager.clock">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <receiver android:name="com.yzrj.lib.alarmmanager.clock.LoongggAlarmReceiver">
+            <intent-filter>
+                <action android:name="com.yzyj.alarm.clock"/>
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name="com.yzrj.lib.alarmmanager.clock.ClockAlarmActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar">
+            <intent-filter>
+                <action android:name="com.yzyj.alarm.clockclarmactivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

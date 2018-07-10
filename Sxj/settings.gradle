@@ -1,0 +1,1 @@
+include ':sxj', ':greendao_java', ':alarmmanagerclock'
