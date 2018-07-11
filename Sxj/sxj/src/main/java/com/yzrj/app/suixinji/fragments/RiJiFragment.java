@@ -2,6 +2,7 @@ package com.yzrj.app.suixinji.fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.trello.rxlifecycle.components.support.RxFragment;
@@ -26,6 +31,7 @@ import com.yzrj.app.suixinji.R;
 import com.yzrj.app.suixinji.RxBus.Event;
 import com.yzrj.app.suixinji.RxBus.RxBus;
 import com.yzrj.app.suixinji.adapter.RiJiAdapter;
+import com.yzrj.app.suixinji.ui.AboutUsActivity;
 import com.yzrj.app.suixinji.ui.MainActivity04;
 import com.yzrj.app.suixinji.ui.RiJiDataActivity;
 import com.yzrj.app.suixinji.utils.AppUtils;
@@ -62,7 +68,10 @@ public class RiJiFragment extends RxFragment {
     private List<Duty> datas;
     private RxBus _rxBus;
     private DrawerLayout drawerLayout;
-    private ImageView imageView;
+    private ImageView imageView;//侧滑菜单键
+    private RadioGroup radioGroup;
+
+    private TextView textlogin;//点击登录
 
 
     @Override
@@ -78,22 +87,20 @@ public class RiJiFragment extends RxFragment {
         qadapter = new RiJiAdapter(getContext(), datas);
         //设置动画
         qadapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
-        drawerLayout = rootView.findViewById(R.id.drawer);
-        imageView = rootView.findViewById(R.id.common_iv_test);
+        drawerLayout = rootView.findViewById(R.id.drawer);//侧滑菜单
+        imageView = rootView.findViewById(R.id.common_iv_test);//侧滑菜单图片按钮
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+        cehua();//侧滑点击事件
 
         rv_show_diary = (RecyclerView) rootView.findViewById(R.id.rv_show_diary);
         rv_show_diary.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_show_diary.setItemAnimator(new DefaultItemAnimator());
         rv_show_diary.setAdapter(qadapter);
-
-
-
 
 
         qadapter.setOnRecyclerViewItemChildClickListener(new BaseQuickAdapter.OnRecyclerViewItemChildClickListener() {
@@ -214,4 +221,42 @@ public class RiJiFragment extends RxFragment {
                     }
                 });
     }
+    public void cehua(){
+        radioGroup = rootView.findViewById(R.id.radio_0);
+        final RadioButton radioButton1 = rootView.findViewById(R.id.radio_1);
+        final RadioButton radioButton2 = rootView.findViewById(R.id.radio_2);
+        final RadioButton radioButton3 = rootView.findViewById(R.id.radio_3);
+        final RadioButton radioButton4 = rootView.findViewById(R.id.radio_4);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioButton1.getId() == i){
+                    radioButton1.setChecked(false);
+                    textlogin = rootView.findViewById(R.id.textLogin);
+                    if(textlogin.getText().equals("点击登录")){
+                        Toast.makeText(getContext(),"请先登录",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getContext(),"同步数据成功",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                if (radioButton2.getId() == i){
+                    radioButton2.setChecked(false);
+                    Intent intent = new Intent(getContext(), AboutUsActivity.class);
+                    startActivity(intent);
+                }
+                if (radioButton3.getId() == i){
+                    radioButton3.setChecked(false);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("qxs@youzirj.com").setIcon(R.drawable.email).setMessage("请将您的宝贵建议发送至上方邮箱，感谢您的使用。");
+                    builder.create().show();
+                }
+                if (radioButton4.getId() == i){
+                    radioButton4.setChecked(false);
+                    Toast.makeText(getContext(),"已是最新版本",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }//侧滑点击事件
 }
