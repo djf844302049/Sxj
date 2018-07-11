@@ -33,6 +33,7 @@ import com.yuukidach.ucount.model.BookItem;
 import com.yuukidach.ucount.model.BookItemAdapter;
 import com.yuukidach.ucount.model.IOItem;
 import com.yuukidach.ucount.model.IOItemAdapter;
+import com.yuukidach.ucount.model.RoundIcon;
 import com.yzrj.app.suixinji.R;
 
 import org.litepal.crud.DataSupport;
@@ -219,6 +220,7 @@ public class ZhanDanFragment extends RxFragment {
         addBookButton = (ImageButton) rootView.findViewById(R.id.add_book_button);
         bookLinearLayout = (LinearLayout) rootView.findViewById(R.id.left_drawer);
         drawerBanner = (ImageView) rootView.findViewById(R.id.drawer_banner);
+
 
         // 设置按钮监听
         btn_name.setOnClickListener(new ButtonListener());

@@ -67,11 +67,12 @@
             android:layout_height="250dp"
             android:background="@drawable/timg111"
             android:orientation="vertical">
-            <ImageView
+            <com.yuukidach.ucount.model.RoundIcon
                 android:id="@+id/image_1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/iconfont_18"
+                android:scaleType="centerCrop"
+                android:src="@drawable/yngmi"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"/>
             <TextView
