@@ -1,13 +1,20 @@
 package com.yzrj.app.suixinji.fragments;
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -17,9 +24,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,6 +51,9 @@ import com.yzrj.app.suixinji.ui.RiJiDataActivity;
 import com.yzrj.app.suixinji.utils.AppUtils;
 import com.yzrj.app.suixinji.utils.DbServices;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,12 +61,14 @@ import java.util.List;
 import rx.functions.Action1;
 import test.greenDAO.bean.Duty;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RiJiFragment extends RxFragment {
-
-
+    public static final int TAKE_PHOTO = 1;//1声明一个常量，拍照请求码
+    public static final int CHOOSE_PHOTO = 2;//2声明一个常量，相册请求码
     private View rootView;
 
     public RiJiFragment() {
@@ -77,6 +92,9 @@ public class RiJiFragment extends RxFragment {
 
     private TextView textlogin;//点击登录
     private RoundIcon roundIcon;
+
+    private Uri imageUri;
+    private ImageView imageView_zhucetouxiang;
 
 
     @Override
@@ -128,9 +146,6 @@ public class RiJiFragment extends RxFragment {
             public void onItemClick(View view, int i) {
                 RiJiDataActivity.start(getActivity(), qadapter.getItem(i));
             }
-        });
-        qadapter.setOnRecyclerViewItemLongClickListener(new BaseQuickAdapter.OnRecyclerViewItemLongClickListener() {
-            @Override
             public boolean onItemLongClick(View view, final int i) {
                 if (qadapter.getItem(i).getId() != null) {
                     // 弹窗确认
@@ -166,6 +181,40 @@ public class RiJiFragment extends RxFragment {
         });
         _rxBus = ((MainActivity04) getActivity()).getRxBusSingleton();
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode){
+            case TAKE_PHOTO:
+                if(resultCode == RESULT_OK){//结果码如果等于RESULT_OK(源码中的常量)
+                    try{//将拍摄的照片显示出来。
+                        // 调用BitmapFactory的decodeStream方法解码
+                        Bitmap bitmap = BitmapFactory.decodeStream( getContext().getContentResolver()
+                                .openInputStream( imageUri ) );
+                        //将Uri解码成为Bitmap，并设置为显示的图片
+                        imageView_zhucetouxiang.setImageBitmap( bitmap );
+                    }catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    }
+                }
+
+//        case CHOOSE_PHOTO:
+//        if (resultCode == RESULT_OK){//2如果结果码是RESULT_OK则通过
+//            //2判断手机系统版本号
+//            if(Build.VERSION.SDK_INT >=19){
+//                //4.4及以上的系统使用这个方法处理图片，在后面写这个方法
+//                handleImageOnKitKat(data);
+//            }else{
+//                //4.4以下版本使用这个方法处理图片，在后面写这个方法
+//                handleImageBeforeKitKat(data);
+//            }
+//            break;
+//        }
+//        default:
+//        break;
+        }
     }
 
     @Override
@@ -285,7 +334,29 @@ public class RiJiFragment extends RxFragment {
                         @Override
                         public void onClick(View view) {
                             //Toast.makeText(getContext(),"注册这辈子是不会注册了",Toast.LENGTH_SHORT).show();
-                            
+                            AlertDialog.Builder register = new AlertDialog.Builder(getContext());
+                            View b = View.inflate(getContext(),R.layout.register,null);
+                            imageView_zhucetouxiang = b.findViewById(R.id.touxiang);
+                            final Button shangc = b.findViewById(R.id.shangchuan);
+                            final EditText register_id = b.findViewById(R.id.edit_register_id);
+                            final EditText register_pass = b.findViewById(R.id.edit__register_pass);
+                            final EditText nicheng = b.findViewById(R.id.nicheng);
+                            final Button zhucea = b.findViewById(R.id.btn_register);
+                            register.setTitle("注册").setIcon(R.drawable.register_a).setView(b);
+                            final AlertDialog alertDialog1 = register.create();//创建对话框
+                            shangc.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    shangchuan();//上传方法
+                                }
+                            });//上传头像点击事件
+                            zhucea.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Toast.makeText(getContext(),"哈哈哈",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            alertDialog1.show();
                         }
                     });//注册的点击事件
                     button.setOnClickListener(new View.OnClickListener() {
@@ -332,4 +403,59 @@ public class RiJiFragment extends RxFragment {
             }
         });
     }//点击登录的点击事件
+    public void shangchuan(){
+        Dialog dialog = new Dialog(getContext(),R.style.my_dialog);
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.xuanzetouxiang,null);
+        TextView takePhoto = inflate.findViewById(R.id.takePhoto);
+        TextView choosePhoto = inflate.findViewById(R.id.choosePhoto);
+        dialog.setContentView(inflate);//设置对话框布局
+        Window dialogWindow = dialog.getWindow();//获取当前窗体
+        dialogWindow.setGravity(Gravity.BOTTOM);//设置对话框从底部弹出
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();//获取窗体的属性
+        lp.y = 5 ;//设置对话框与底部的距离
+        lp.alpha = 9f;//透明度
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialogWindow.setAttributes(lp);//将属性设置给窗体
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                File outputImage = new File( getContext().getExternalCacheDir(),"output_image.jpg" );
+                try{
+                    if(outputImage.exists()){//如果这个File对象存在
+                        outputImage.delete();//那就删除它
+                    }
+                    outputImage.createNewFile();//创建新的File对象
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                //为啥要进行一下判断，因为从安卓7.0开始直接使用本地真实路径的Uri被认为是不安全的，
+                //会抛出一个FileUriExposedException异常，而FileProvider则是一种特殊的内容提供器
+                //它使用了和内容提供器类似的机制来对数据进行保护，可以选择将封装过的Uri共享给外部。
+                if(Build.VERSION.SDK_INT >= 24){//判断系统版本是否高于Android7.0，如果是则
+                    //调用FileProvider的getUriForFile方法将File对象转换成一个封装过的Uri对象
+                    //参数一Context对象，参数二可以是任意唯一的字符串，参数三则是我们刚刚创建的File对象
+                    imageUri = FileProvider.getUriForFile( getContext(),
+                            "com.example.a84430.fileprovider",outputImage );
+                }else{//如果是低于7.0，则
+                    //调用Uri的fromFile()方法将File对象转换成Uri对象，这个Uri对象标识着
+                    // output_image.jpg这张图片的本地真实路径。
+                    imageUri = Uri.fromFile( outputImage );
+                }
+                //启动相机程序
+                Intent intent = new Intent( "android.media.action.IMAGE_CAPTURE" );
+                //指定图片输出地址，这里填入刚得到的Uri对象
+                intent.putExtra( MediaStore.EXTRA_OUTPUT,imageUri );
+                //为啥调用startActivityForResult()，原因在笔记里
+                startActivityForResult( intent,1 );
+            }
+        });
+        choosePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        dialog.show();//显示对话框
+    }//上传头像方法
 }
+
