@@ -16,6 +16,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,7 @@ public class RiJiFragment extends RxFragment {
         rv_show_diary.setItemAnimator(new DefaultItemAnimator());
         rv_show_diary.setAdapter(qadapter);
 
-        roundIcon.setImageResource(R.drawable.yangmi2);//动态换头像
+
 
         qadapter.setOnRecyclerViewItemChildClickListener(new BaseQuickAdapter.OnRecyclerViewItemChildClickListener() {
             @Override
@@ -271,30 +272,63 @@ public class RiJiFragment extends RxFragment {
         textlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());//创建对话框构建器
-                View view2 = View.inflate(getContext(),R.layout.login,null);//设置布局
-                final EditText usename = view2.findViewById(R.id.edit_id);//获取布局里的输入框
-                final EditText password = view2.findViewById(R.id.edit_pass);
-                final TextView textV = view2.findViewById(R.id.textzhuce);
-                final Button button = view2.findViewById(R.id.btn_login);
-                builder.setTitle("登录").setIcon(R.mipmap.ico).setView(view2);//设置对话框参数
-                final AlertDialog alertDialog  = builder.create();//创建对话框
-                textV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getContext(),"注册这辈子是不会注册了",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getContext(),"登录这辈子是不会登录了",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if(textlogin.getText().equals("点击登录")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());//创建对话框构建器
+                    View view2 = View.inflate(getContext(),R.layout.login,null);//设置布局
+                    final EditText usename = view2.findViewById(R.id.edit_id);//获取布局里的输入框
+                    final EditText password = view2.findViewById(R.id.edit_pass);
+                    final TextView textV = view2.findViewById(R.id.textzhuce);
+                    final Button button = view2.findViewById(R.id.btn_login);
+                    builder.setTitle("登录").setIcon(R.mipmap.ico).setView(view2);//设置对话框参数
+                    final AlertDialog alertDialog  = builder.create();//创建对话框
+                    textV.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //Toast.makeText(getContext(),"注册这辈子是不会注册了",Toast.LENGTH_SHORT).show();
+                            
+                        }
+                    });//注册的点击事件
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String u = usename.getText().toString();
+                            String p = password.getText().toString();
+                            if(u.equals("123456")&&p.equals("123456")){
+                                Toast.makeText(getContext(),"登录成功",Toast.LENGTH_SHORT).show();
+                                textlogin.setText("皮皮虾跟我来");
+                                int a = textlogin.getText().length();
+                                if(a>4&&a<6){
+                                    textlogin.setTextSize(25);
+                                }else if(a>5&&a<7){
+                                    textlogin.setTextSize(22);
+                                }
+                                alertDialog.dismiss();//关闭对话框
+                                roundIcon.setImageResource(R.drawable.yangmi2);//动态设置圆形头像
+                            }else {
+                                Toast.makeText(getContext(),"账号或密码错误",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
-                alertDialog.show();
+                    alertDialog.show();
+                }else{//如果是已经登录，点击注销
+                    AlertDialog.Builder aa = new AlertDialog.Builder(getContext());
+                    aa.setTitle("注销").setIcon(R.drawable.exit).setMessage("是否退出登录？")
+                            .setPositiveButton("是的", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    textlogin.setText("点击登录");
+                                    textlogin.setTextSize(30);
+                                    roundIcon.setImageResource(R.drawable.yngmi);
+                                }
+                            }).setNegativeButton("不", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-
+                        }
+                    });
+                    aa.create().show();//创建对话框
+                }
             }
         });
     }//点击登录的点击事件
