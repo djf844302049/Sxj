@@ -72,7 +72,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/yngmi"
+
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"/>
             <TextView

@@ -19,6 +19,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.trello.rxlifecycle.components.support.RxFragment;
+import com.yuukidach.ucount.model.RoundIcon;
 import com.yzrj.app.suixinji.R;
 import com.yzrj.app.suixinji.RxBus.Event;
 import com.yzrj.app.suixinji.RxBus.RxBus;
@@ -72,6 +75,7 @@ public class RiJiFragment extends RxFragment {
     private RadioGroup radioGroup;
 
     private TextView textlogin;//点击登录
+    private RoundIcon roundIcon;
 
 
     @Override
@@ -88,6 +92,8 @@ public class RiJiFragment extends RxFragment {
         //设置动画
         qadapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         drawerLayout = rootView.findViewById(R.id.drawer);//侧滑菜单
+        roundIcon =rootView.findViewById(R.id.image_1);
+        textlogin = rootView.findViewById(R.id.textLogin);
         imageView = rootView.findViewById(R.id.common_iv_test);//侧滑菜单图片按钮
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,12 +102,14 @@ public class RiJiFragment extends RxFragment {
             }
         });
         cehua();//侧滑点击事件
+        dianjilogin();//点击登录的点击事件
 
         rv_show_diary = (RecyclerView) rootView.findViewById(R.id.rv_show_diary);
         rv_show_diary.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_show_diary.setItemAnimator(new DefaultItemAnimator());
         rv_show_diary.setAdapter(qadapter);
 
+        roundIcon.setImageResource(R.drawable.yangmi2);//动态换头像
 
         qadapter.setOnRecyclerViewItemChildClickListener(new BaseQuickAdapter.OnRecyclerViewItemChildClickListener() {
             @Override
@@ -232,7 +240,7 @@ public class RiJiFragment extends RxFragment {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioButton1.getId() == i){
                     radioButton1.setChecked(false);
-                    textlogin = rootView.findViewById(R.id.textLogin);
+
                     if(textlogin.getText().equals("点击登录")){
                         Toast.makeText(getContext(),"请先登录",Toast.LENGTH_SHORT).show();
                     }else {
@@ -259,4 +267,35 @@ public class RiJiFragment extends RxFragment {
             }
         });
     }//侧滑点击事件
+    public void dianjilogin(){
+        textlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());//创建对话框构建器
+                View view2 = View.inflate(getContext(),R.layout.login,null);//设置布局
+                final EditText usename = view2.findViewById(R.id.edit_id);//获取布局里的输入框
+                final EditText password = view2.findViewById(R.id.edit_pass);
+                final TextView textV = view2.findViewById(R.id.textzhuce);
+                final Button button = view2.findViewById(R.id.btn_login);
+                builder.setTitle("登录").setIcon(R.mipmap.ico).setView(view2);//设置对话框参数
+                final AlertDialog alertDialog  = builder.create();//创建对话框
+                textV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getContext(),"注册这辈子是不会注册了",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getContext(),"登录这辈子是不会登录了",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.show();
+
+
+            }
+        });
+    }//点击登录的点击事件
 }
